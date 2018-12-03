@@ -10,7 +10,7 @@ fn main() {
 
     inp.read_to_string(&mut content).expect("something went wrong reading the file");
 
-    let operations = content.split("\n");
+    //let operations = content.split("\n");
 
     let mut start = 0;
 
@@ -18,28 +18,28 @@ fn main() {
 
     vals.insert(0, 1);
 
-    for i in operations {
-        let number: i32 = i.parse().expect("not a number");
-        start += number;
-        
-        let mut occurance = 0;
+    let mut duplicate = false;
+    let mut duplicate_vals: Vec<i32> = Vec::new();
 
-        match vals.get(&start) {
-            Some(_val) => {
-                occurance += 1;
-                vals.entry(start).or_insert(occurance);
-            },
-            None => {
-                occurance = 1;
-                vals.insert(start, occurance);
+    while duplicate == false {
+
+        let operations = content.split("\n");
+
+        for i in operations {
+            let number: i32 = i.parse().expect("not a number");
+            
+            start += number;
+
+            match vals.get(&start) {
+                Some(_val) => {
+                    duplicate = true;
+                    duplicate_vals.push(start);
+                },
+                None => {
+                    vals.insert(start, 1);
+                }
             }
         }
     }
-
-    for (key, val) in &vals {
-        if val >= &2 {
-            println!("{} : {}", key, val);
-        }
-    }
-    
+    println!("first duplicate val: {}", duplicate_vals[0]);
 }
