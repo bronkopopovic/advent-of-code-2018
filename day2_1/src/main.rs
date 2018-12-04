@@ -18,16 +18,16 @@ fn main() {
         let mut map: HashMap<char, i32> = HashMap::new();
 
         for c in line.chars() {
-            let mut exists = false;
+            let mut c_exists = false;
             match map.get(&c) {
                 Some(_val) => {
-                    exists = true;
+                    c_exists = true;
                 },
                 None => {
-                    exists = false;
+                    c_exists = false;
                 }
             }
-            if exists == true {
+            if c_exists == true {
                 let prev_val = map[&c];
                 map.insert(c, prev_val + 1);
             } else {
