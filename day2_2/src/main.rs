@@ -33,17 +33,15 @@ fn main() {
                     }
                 }
                 
-                let line1copy = line1.clone();
-                
                 if misses == 1 {
 
                     boxes_found = true;
 
                     let mut result = String::new();
 
-                    for l in 0 .. line1copy.len() {
+                    for l in 0 .. line1.len() {
                         if l != index {
-                            result.push(line1copy[l]);
+                            result.push(line1[l]);
                         }
                     }
                     println!("Your result is {}", result);
