@@ -18,7 +18,7 @@ fn main() {
         let mut map: HashMap<char, i32> = HashMap::new();
 
         for c in line.chars() {
-            let mut c_exists = false;
+            let mut c_exists;
             match map.get(&c) {
                 Some(_val) => {
                     c_exists = true;
