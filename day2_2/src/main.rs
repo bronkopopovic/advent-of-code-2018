@@ -3,11 +3,10 @@ use std::io::prelude::*;
 //use std::collections::HashMap;
 
 fn main() {
-    let mut inp = File::open("src/input.txt").expect("File not found!");
-
     let mut content = String::new();
 
-    inp.read_to_string(&mut content).expect("something went wrong reading the file");
+    File::open("src/input.txt").expect("File not found!")
+        .read_to_string(&mut content).expect("something went wrong reading the file");
 
     let lines1 = content.split("\n").collect::<Vec<&str>>();
     let lines2 = content.split("\n").collect::<Vec<&str>>();

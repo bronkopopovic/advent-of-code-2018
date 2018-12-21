@@ -3,18 +3,15 @@ use std::io::prelude::*;
 use std::collections::HashMap;
 
 fn main() {
-    let mut inp = File::open("src/input.txt").expect("File not found!");
-
     let mut content = String::new();
 
-    inp.read_to_string(&mut content).expect("something went wrong reading the file");
-
-    let lines = content.split("\n");
+    File::open("src/input.txt").expect("File not found!")
+        .read_to_string(&mut content).expect("something went wrong reading the file");
 
     let mut total_doubles = 0;
     let mut total_triples = 0;
 
-    for line in lines {
+    for line in content.split("\n") {
         let mut map: HashMap<char, i32> = HashMap::new();
 
         for c in line.chars() {
