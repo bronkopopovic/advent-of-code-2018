@@ -18,13 +18,10 @@ fn main() {
     for line in content.split("\n") {        
         let caps = re.captures(&line).unwrap();
 
-        let id: i32 = caps[1].parse().expect("not a number");
-        let x: i32 = caps[2].parse().expect("not a number");
-        let y: i32 = caps[3].parse().expect("not a number");
-        let w: i32 = caps[4].parse().expect("not a number");
-        let h: i32 = caps[5].parse().expect("not a number");
-        
-        claims.push( (id, (x, y), (w, h)) );
+        claims.push( (caps[1].parse::<i32>().expect("not a number"), 
+            (caps[2].parse::<i32>().expect("not a number"), caps[3].parse::<i32>().expect("not a number")), 
+            (caps[4].parse::<i32>().expect("not a number"), caps[5].parse::<i32>().expect("not a number"))
+        ) );
     }
 
     let mut fabric: HashMap<(i32, i32), bool> = HashMap::new();
