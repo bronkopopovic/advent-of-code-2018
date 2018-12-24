@@ -24,7 +24,7 @@ struct Log {
     action: LogType,
 }
 
-fn print_logs(_logs: Vec<Log>) {
+fn print_logs(_logs: &Vec<Log>) {
     for _log in _logs {    
         match _log.action {
             LogType::GuardBegins(_id) => {
@@ -116,9 +116,9 @@ fn main() {
     let mut logs: Vec<Log> = Vec::new();
 
     populate_logs(content, &mut logs);
-
+    
     sort_logs(&mut logs);
 
-    print_logs(logs);
+    print_logs(&logs);
     
 }
