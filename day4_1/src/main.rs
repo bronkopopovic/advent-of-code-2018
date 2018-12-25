@@ -25,25 +25,6 @@ struct Log {
     action: LogType,
 }
 
-fn print_logs(_logs: &Vec<Log>) {
-    for _log in _logs {    
-        match _log.action {
-            LogType::GuardBegins(_id) => {
-                println!("{}-{}-{}, {}:{} - Guard {} starts", _log.date.year, _log.date.month, _log.date.day, _log.date.hour, _log.date.minute, _id);
-            },
-            LogType::FallAsleep => {
-                println!("{}-{}-{}, {}:{} - falls asleep", _log.date.year, _log.date.month, _log.date.day, _log.date.hour, _log.date.minute);
-            },
-            LogType::WakeUp => {
-                println!("{}-{}-{}, {}:{} - wakes up", _log.date.year, _log.date.month, _log.date.day, _log.date.hour, _log.date.minute);
-            }
-            _ => {
-                println!("none");
-            }
-        }
-    }
-}
-
 fn populate_logs(_content: String, _logs: &mut Vec<Log>) {
 
     let log_regex = Regex::new(r"\[(\d{4})\-(\d{2})\-(\d{2})\s(\d{2}):(\d{2})\]\s(.+)").unwrap();
@@ -161,7 +142,7 @@ fn get_target_guard(_guards: &mut HashMap<i32, HashMap<i32, i32>>) {
 
     for (guard, minutes) in _guards.iter() {
         let mut guard_total = 0;
-        for (minute, occurance) in minutes.iter() {
+        for (_minute, occurance) in minutes.iter() {
             guard_total += occurance;
         }
         if guard_total > total_minutes {
