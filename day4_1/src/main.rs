@@ -182,8 +182,6 @@ fn main() {
     
     sort_logs(&mut logs);
 
-    //print_logs(&logs);
-
     let mut guards: HashMap<i32, HashMap<i32, i32>> = HashMap::new();
 
     populate_guards(&mut guards, &mut logs);
