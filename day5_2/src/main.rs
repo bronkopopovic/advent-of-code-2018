@@ -19,14 +19,7 @@ fn adjacent_match(polymer: &Vec<char>, ch: &char, i: usize) -> bool {
     adj_match
 }
 
-fn main() {
-    let mut content = String::new();
-
-    File::open("src/input.txt").expect("File not found!")
-        .read_to_string(&mut content).expect("something went wrong reading the file");
-
-    let mut polymer = content.chars().collect::<Vec<_>>();
-
+fn react(polymer: &mut Vec<char>) -> usize {
     let mut reaction_finished = false;
 
     while !reaction_finished {
@@ -67,5 +60,56 @@ fn main() {
         }
     }
 
-    println!("\n\nfinal length: {}", polymer.len());
+    polymer.len()
+}
+
+fn improve(polymer: &mut Vec<char>) -> usize {
+
+    let mut test_result: usize;
+
+    let alphabet: Vec<char> = vec!['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+    let mut shortest_poly: usize = polymer.len();
+    
+    for ch in alphabet.iter() {
+
+        let mut unit_indices: Vec<usize> = Vec::new();
+        
+        let mut test_polymer = polymer.clone();
+
+        for (i, n) in test_polymer.iter().enumerate() {
+            if ch == n || &ch.to_uppercase().collect::<Vec<_>>()[0] == n {
+                unit_indices.push(i.clone());
+            }
+        }
+
+        unit_indices.sort_by( |a, b| {
+            a.cmp(&b)
+        });
+
+        let mut iter: usize = 0;
+        for i in unit_indices {
+            test_polymer.remove(i - iter);
+            iter += 1;
+        }
+
+        test_result = react(&mut test_polymer);
+        
+        if test_result < shortest_poly {
+            shortest_poly = test_result;
+        }
+    }
+    shortest_poly
+}
+
+fn main() {
+    let mut content = String::new();
+
+    File::open("src/input.txt").expect("File not found!")
+        .read_to_string(&mut content).expect("something went wrong reading the file");
+
+    let mut polymer = content.chars().collect::<Vec<_>>();
+
+    println!("{}", improve(&mut polymer));
+    
 }
