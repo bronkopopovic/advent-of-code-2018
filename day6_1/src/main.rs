@@ -1,14 +1,31 @@
 use std::fs::File;
 use std::io::prelude::*;
-//use std::collections::HashMap;
+use std::collections::HashMap;
 
 struct Coord {
     x: i32,
     y: i32
 }
 
+struct Grid {
+    matrix: Vec< Vec<Coord> >,
+    coords: Vec<Coord>,
+    nearest: HashMap<Coord, Coord>
+}
+
+impl Grid {
+    fn populate_matrix(&mut self, dimension: i32) {
+        let bounding_min: i32 = 
+        let bounding_max: i32 = 
+    }
+}
+
 fn get_distance(p: &Coord, q: &Coord) -> i32 {
-    return (&p.x - &q.x).abs() + (&p.y - &q.y).abs();
+    (&p.x - &q.x).abs() + (&p.y - &q.y).abs()
+}
+
+fn is_infinite(coords: &Vec<Coord>, sample: &Coord) -> bool {
+
 }
 
 fn main() {
@@ -36,5 +53,5 @@ fn main() {
     for c in coords {
         println!("{}, {}", c.x, c.y)
     }
-    
+
 }
